@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lymsta</title>
+<meta name="description" content="Lymsta — coming soon.">
+<link rel="canonical" href="https://lymsta.com/">
+
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://lymsta.com/">
+<meta property="og:title" content="Lymsta">
+<meta property="og:description" content="Coming soon.">
+<meta property="og:image" content="https://lymsta.com/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Lymsta">
+<meta name="twitter:description" content="Coming soon.">
+<meta name="twitter:image" content="https://lymsta.com/og.png">
+
+<meta name="theme-color" content="#09090b">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --bg:#09090b;
+    --ink:#fafafa;
+    --muted:#8b8b94;
+    --rule:rgba(250,250,250,.14);
+    --glow:rgba(120,160,255,.16);
+  }
+
+  *{box-sizing:border-box}
+  html,body{height:100%}
+
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:2rem;
+    overflow:hidden;
+  }
+
+  /* soft lamp behind the wordmark */
+  body::before{
+    content:"";
+    position:fixed;
+    inset:-20%;
+    background:
+      radial-gradient(42rem 28rem at 50% 42%, var(--glow), transparent 68%),
+      radial-gradient(30rem 30rem at 82% 88%, rgba(255,140,190,.09), transparent 70%);
+    pointer-events:none;
+    z-index:0;
+  }
+
+  /* fine grain so the gradient never bands */
+  body::after{
+    content:"";
+    position:fixed;
+    inset:0;
+    z-index:1;
+    pointer-events:none;
+    opacity:.035;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  main{
+    position:relative;
+    z-index:2;
+    text-align:center;
+    max-width:34rem;
+  }
+
+  .mark{
+    margin:0;
+    font-weight:300;
+    font-size:clamp(3rem, 15vw, 7.5rem);
+    letter-spacing:-.045em;
+    line-height:1;
+  }
+
+  /* the dot carries the only saturated colour on the page */
+  .mark .dot{color:#8ab4ff}
+
+  .rule{
+    width:3.5rem;
+    height:1px;
+    margin:2.5rem auto;
+    background:var(--rule);
+  }
+
+  .status{
+    margin:0;
+    font-size:.8125rem;
+    font-weight:400;
+    letter-spacing:.22em;
+    text-transform:uppercase;
+    color:var(--muted);
+  }
+
+  footer{
+    position:fixed;
+    bottom:1.75rem;
+    left:0;
+    right:0;
+    z-index:2;
+    text-align:center;
+    font-size:.75rem;
+    letter-spacing:.06em;
+    color:var(--muted);
+  }
+  footer a{color:inherit;text-decoration:none;border-bottom:1px solid transparent;transition:border-color .2s,color .2s}
+  footer a:hover,footer a:focus-visible{color:var(--ink);border-bottom-color:var(--rule)}
+
+  /* entrance */
+  .fade{opacity:0;transform:translateY(.5rem);animation:rise .9s cubic-bezier(.22,.61,.36,1) forwards}
+  .fade--2{animation-delay:.14s}
+  .fade--3{animation-delay:.26s}
+  .fade--4{animation-delay:.42s}
+  @keyframes rise{to{opacity:1;transform:none}}
+
+  @media (prefers-reduced-motion:reduce){
+    .fade{animation:none;opacity:1;transform:none}
+  }
+</style>
+</head>
+<body>
+  <main>
+    <h1 class="mark fade">lymsta<span class="dot">.</span></h1>
+    <div class="rule fade fade--2"></div>
+    <p class="status fade fade--3">Coming soon</p>
+  </main>
+
+  <footer class="fade fade--4">
+    <a href="mailto:hello@lymsta.com">hello@lymsta.com</a>
+  </footer>
+</body>
+</html>
