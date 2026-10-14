@@ -1,1 +1,4 @@
 .DS_Store
+
+# Stray assets dropped in the repo root — not part of the site
+*.jpg

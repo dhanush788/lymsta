@@ -3,18 +3,19 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Lymsta</title>
-<meta name="description" content="Lymsta — coming soon.">
+<title>Lymsta — independent app studio</title>
+<meta name="description" content="Lymsta is an independent app studio. We design, build and ship our own apps for web, Android and iOS.">
 <link rel="canonical" href="https://lymsta.com/">
 
 <meta property="og:type" content="website">
+<meta property="og:site_name" content="Lymsta">
 <meta property="og:url" content="https://lymsta.com/">
-<meta property="og:title" content="Lymsta">
-<meta property="og:description" content="Coming soon.">
+<meta property="og:title" content="Lymsta — independent app studio">
+<meta property="og:description" content="We design, build and ship our own apps for web, Android and iOS.">
 <meta property="og:image" content="https://lymsta.com/og.png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Lymsta">
-<meta name="twitter:description" content="Coming soon.">
+<meta name="twitter:title" content="Lymsta — independent app studio">
+<meta name="twitter:description" content="We design, build and ship our own apps for web, Android and iOS.">
 <meta name="twitter:image" content="https://lymsta.com/og.png">
 
 <meta name="theme-color" content="#09090b">
@@ -30,34 +31,40 @@
     --ink:#fafafa;
     --muted:#8b8b94;
     --rule:rgba(250,250,250,.14);
+    --rule-soft:rgba(250,250,250,.07);
+    --accent:#8ab4ff;
     --glow:rgba(120,160,255,.16);
+    --pad:clamp(1.25rem, 5vw, 2.5rem);
+    --max:64rem;
   }
 
   *{box-sizing:border-box}
-  html,body{height:100%}
+
+  html{
+    /* never let a long word or a wide child push the page sideways */
+    overflow-x:hidden;
+  }
 
   body{
     margin:0;
+    min-height:100%;
     background:var(--bg);
     color:var(--ink);
     font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+    font-weight:300;
     -webkit-font-smoothing:antialiased;
     text-rendering:optimizeLegibility;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    padding:2rem;
-    overflow:hidden;
+    overflow-x:hidden;
   }
 
-  /* soft lamp behind the wordmark */
+  /* soft lamp — same two sources as the original page */
   body::before{
     content:"";
     position:fixed;
     inset:-20%;
     background:
-      radial-gradient(42rem 28rem at 50% 42%, var(--glow), transparent 68%),
-      radial-gradient(30rem 30rem at 82% 88%, rgba(255,140,190,.09), transparent 70%);
+      radial-gradient(42rem 28rem at 50% 18%, var(--glow), transparent 68%),
+      radial-gradient(30rem 30rem at 86% 86%, rgba(255,140,190,.08), transparent 70%);
     pointer-events:none;
     z-index:0;
   }
@@ -73,32 +80,24 @@
     background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   }
 
-  main{
-    position:relative;
-    z-index:2;
-    text-align:center;
-    max-width:34rem;
+  .site-header,main,.site-footer{position:relative;z-index:2}
+
+  .wrap{
+    width:100%;
+    max-width:var(--max);
+    margin-left:auto;
+    margin-right:auto;
+    padding-left:var(--pad);
+    padding-right:var(--pad);
   }
 
-  .mark{
-    margin:0;
-    font-weight:300;
-    font-size:clamp(3rem, 15vw, 7.5rem);
-    letter-spacing:-.045em;
-    line-height:1;
-  }
+  /* ---------- type ---------- */
 
-  /* the dot carries the only saturated colour on the page */
-  .mark .dot{color:#8ab4ff}
+  h1,h2,h3{font-weight:300;margin:0}
 
-  .rule{
-    width:3.5rem;
-    height:1px;
-    margin:2.5rem auto;
-    background:var(--rule);
-  }
+  p{margin:0}
 
-  .status{
+  .label{
     margin:0;
     font-size:.8125rem;
     font-weight:400;
@@ -107,41 +106,440 @@
     color:var(--muted);
   }
 
-  footer{
-    position:fixed;
-    bottom:1.75rem;
-    left:0;
-    right:0;
-    z-index:2;
-    text-align:center;
+  /* the dot carries the only saturated colour on the page */
+  .dot{color:var(--accent)}
+
+  a{color:inherit}
+
+  :focus-visible{
+    outline:2px solid var(--accent);
+    outline-offset:3px;
+    border-radius:2px;
+  }
+
+  .skip{
+    position:absolute;
+    left:-9999px;
+    top:0;
+    z-index:10;
+    padding:.6rem 1rem;
+    background:#141418;
+    color:var(--ink);
+    font-size:.875rem;
+    text-decoration:none;
+  }
+  .skip:focus{left:var(--pad);top:.75rem}
+
+  /* ---------- header ---------- */
+
+  .site-header .wrap{
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:.75rem 1.5rem;
+    padding-top:1.75rem;
+    padding-bottom:1.75rem;
+  }
+
+  .wordmark{
+    font-size:1.3125rem;
+    letter-spacing:-.045em;
+    line-height:1;
+    text-decoration:none;
+    color:var(--ink);
+  }
+
+  .nav{
+    display:flex;
+    flex-wrap:wrap;
+    gap:.5rem clamp(1rem, 3.5vw, 2rem);
+    list-style:none;
+    margin:0;
+    padding:0;
+  }
+  .nav a{
     font-size:.75rem;
-    letter-spacing:.06em;
+    font-weight:400;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    color:var(--muted);
+    text-decoration:none;
+    border-bottom:1px solid transparent;
+    padding-bottom:2px;
+    transition:color .2s, border-color .2s;
+  }
+  .nav a:hover,.nav a:focus-visible{color:var(--ink);border-bottom-color:var(--rule)}
+
+  /* ---------- hero ---------- */
+
+  .hero{
+    padding-top:clamp(3.5rem, 12vh, 7rem);
+    padding-bottom:clamp(4rem, 12vh, 7.5rem);
+  }
+
+  .hero h1{
+    margin:1.75rem 0 0;
+    font-size:clamp(2.25rem, 7vw, 4.25rem);
+    letter-spacing:-.04em;
+    line-height:1.06;
+    max-width:17ch;
+  }
+
+  .lead{
+    margin:1.75rem 0 0;
+    max-width:46ch;
+    font-size:clamp(1rem, 1.6vw, 1.125rem);
+    line-height:1.75;
     color:var(--muted);
   }
-  footer a{color:inherit;text-decoration:none;border-bottom:1px solid transparent;transition:border-color .2s,color .2s}
-  footer a:hover,footer a:focus-visible{color:var(--ink);border-bottom-color:var(--rule)}
 
-  /* entrance */
+  .hero-rule{
+    width:3.5rem;
+    height:1px;
+    margin:2.5rem 0 0;
+    background:var(--rule);
+  }
+
+  /* ---------- sections ---------- */
+
+  .section{
+    border-top:1px solid var(--rule);
+    padding-top:clamp(3.5rem, 8vw, 5.5rem);
+    padding-bottom:clamp(3.5rem, 8vw, 5.5rem);
+    scroll-margin-top:1.5rem;
+  }
+
+  .section h2{
+    margin:1.125rem 0 0;
+    font-size:clamp(1.75rem, 4vw, 2.5rem);
+    letter-spacing:-.03em;
+    line-height:1.15;
+    max-width:20ch;
+  }
+
+  .section-note{
+    margin:1.25rem 0 0;
+    max-width:44ch;
+    line-height:1.75;
+    color:var(--muted);
+  }
+
+  /* ---------- products ---------- */
+
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+    gap:1rem;
+    margin-top:clamp(2.5rem, 6vw, 3.5rem);
+  }
+
+  .card{
+    display:flex;
+    flex-direction:column;
+    gap:.875rem;
+    min-width:0;
+    padding:clamp(1.5rem, 3.5vw, 1.875rem);
+    border:1px solid var(--rule-soft);
+    border-radius:.75rem;
+    background:rgba(250,250,250,.018);
+    transition:border-color .25s, background-color .25s;
+  }
+  .card:hover{border-color:var(--rule);background:rgba(250,250,250,.03)}
+
+  .card h3{
+    font-size:1.125rem;
+    font-weight:400;
+    letter-spacing:-.015em;
+    line-height:1.3;
+    overflow-wrap:anywhere;
+  }
+
+  .card-desc{
+    color:var(--muted);
+    font-size:.9375rem;
+    line-height:1.7;
+  }
+
+  .badges{
+    display:flex;
+    flex-wrap:wrap;
+    gap:.375rem;
+    list-style:none;
+    margin:.25rem 0 0;
+    padding:0;
+  }
+  .badges li{
+    font-size:.75rem;
+    font-weight:400;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    color:var(--muted);
+    border:1px solid var(--rule-soft);
+    border-radius:999px;
+    padding:.25rem .625rem;
+  }
+
+  .status{
+    display:flex;
+    align-items:center;
+    gap:.5rem;
+    margin-top:auto;
+    padding-top:1.125rem;
+    border-top:1px solid var(--rule-soft);
+    font-size:.75rem;
+    font-weight:400;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--muted);
+  }
+  .status i{
+    flex:none;
+    width:.4375rem;
+    height:.4375rem;
+    border:1px solid currentColor;
+    border-radius:50%;
+    animation:breathe 3.2s ease-in-out infinite;
+  }
+  @keyframes breathe{0%,100%{opacity:1}50%{opacity:.35}}
+
+  /* ---------- approach ---------- */
+
+  .points{
+    list-style:none;
+    margin:clamp(2.5rem, 6vw, 3.5rem) 0 0;
+    padding:0;
+    display:grid;
+    grid-template-columns:1fr;
+    gap:clamp(2rem, 4vw, 2.75rem);
+  }
+  @media (min-width:48rem){
+    .points{grid-template-columns:1fr 1fr}
+  }
+  .points li{
+    min-width:0;
+    border-top:1px solid var(--rule);
+    padding-top:1.25rem;
+  }
+  .points .num{
+    display:block;
+    font-size:.75rem;
+    font-weight:400;
+    letter-spacing:.2em;
+    color:var(--muted);
+  }
+  .points h3{
+    margin:1rem 0 .625rem;
+    font-size:1.0625rem;
+    font-weight:400;
+    letter-spacing:-.01em;
+  }
+  .points p{
+    color:var(--muted);
+    font-size:.9375rem;
+    line-height:1.75;
+  }
+
+  /* ---------- contact ---------- */
+
+  .mail{
+    display:inline-block;
+    margin-top:clamp(2rem, 5vw, 2.5rem);
+    font-size:clamp(1.375rem, 4.5vw, 2rem);
+    letter-spacing:-.025em;
+    color:var(--ink);
+    text-decoration:none;
+    border-bottom:1px solid var(--rule);
+    padding-bottom:.2rem;
+    overflow-wrap:anywhere;
+    transition:border-color .2s;
+  }
+  .mail:hover,.mail:focus-visible{border-bottom-color:var(--accent)}
+
+  /* ---------- footer ---------- */
+
+  .site-footer{border-top:1px solid var(--rule)}
+  .site-footer .wrap{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    justify-content:space-between;
+    gap:1.25rem 2rem;
+    padding-top:2.5rem;
+    padding-bottom:2.75rem;
+  }
+  .foot-left{display:flex;align-items:baseline;flex-wrap:wrap;gap:.5rem 1rem}
+  .foot-left .wordmark{font-size:1.0625rem}
+  .copy{font-size:.8125rem;font-weight:400;letter-spacing:.04em;color:var(--muted)}
+
+  /* ---------- entrance ---------- */
+
   .fade{opacity:0;transform:translateY(.5rem);animation:rise .9s cubic-bezier(.22,.61,.36,1) forwards}
-  .fade--2{animation-delay:.14s}
-  .fade--3{animation-delay:.26s}
-  .fade--4{animation-delay:.42s}
+  .fade--2{animation-delay:.1s}
+  .fade--3{animation-delay:.2s}
+  .fade--4{animation-delay:.3s}
   @keyframes rise{to{opacity:1;transform:none}}
+
+  @media (prefers-reduced-motion:no-preference){
+    html{scroll-behavior:smooth}
+  }
 
   @media (prefers-reduced-motion:reduce){
     .fade{animation:none;opacity:1;transform:none}
+    .status i{animation:none}
+    *{transition-duration:.01ms !important}
   }
 </style>
 </head>
 <body>
-  <main>
-    <h1 class="mark fade">lymsta<span class="dot">.</span></h1>
-    <div class="rule fade fade--2"></div>
-    <p class="status fade fade--3">Coming soon</p>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="wrap">
+      <a class="wordmark" href="/">lymsta<span class="dot">.</span></a>
+      <nav aria-label="Primary">
+        <ul class="nav">
+          <li><a href="#products">Products</a></li>
+          <li><a href="#approach">Approach</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <section class="hero">
+      <div class="wrap">
+        <p class="label fade">Independent app studio</p>
+        <h1 class="fade fade--2">We build the apps we want to use<span class="dot">.</span></h1>
+        <p class="lead fade fade--3">Lymsta designs, builds and ships its own software — on the web, on Android and on iOS. Nothing here is client work.</p>
+        <div class="hero-rule fade fade--4"></div>
+      </div>
+    </section>
+
+    <section class="section" id="products" aria-labelledby="products-h">
+      <div class="wrap">
+        <p class="label">Products</p>
+        <h2 id="products-h">What we&rsquo;re building</h2>
+        <p class="section-note">Nothing has shipped yet. When something does, it shows up here &mdash; with a link to the web app and to the stores.</p>
+
+        <!-- ==========================================================
+             PRODUCTS — PLACEHOLDER ENTRIES. Edit me.
+
+             Three slots below, each one <article class="card">.
+             For each real product:
+               1. replace the <h3> text with the product name
+               2. replace the .card-desc line with one plain sentence
+                  on what it does
+               3. delete any <li> platform badge that does not apply
+                  (Web / Android / iOS)
+               4. leave the status as "In development" until it ships,
+                  then change the text (e.g. "Live" / "Beta") and, if
+                  you like, drop the <i></i> pulse dot
+
+             To REMOVE a slot: delete its whole <article>…</article>.
+             To ADD one: copy an <article> and bump data-product.
+             The grid reflows on its own for 1, 2, 3 or 4 entries.
+             ========================================================== -->
+
+        <div class="grid">
+
+          <article class="card" data-product="1">
+            <h3>Product one</h3>
+            <p class="card-desc">One line on what it does goes here.</p>
+            <ul class="badges">
+              <li>Web</li>
+              <li>Android</li>
+              <li>iOS</li>
+            </ul>
+            <p class="status"><i aria-hidden="true"></i>In development</p>
+          </article>
+
+          <article class="card" data-product="2">
+            <h3>Product two</h3>
+            <p class="card-desc">One line on what it does goes here.</p>
+            <ul class="badges">
+              <li>Web</li>
+              <li>Android</li>
+              <li>iOS</li>
+            </ul>
+            <p class="status"><i aria-hidden="true"></i>In development</p>
+          </article>
+
+          <article class="card" data-product="3">
+            <h3>Product three</h3>
+            <p class="card-desc">One line on what it does goes here.</p>
+            <ul class="badges">
+              <li>Web</li>
+              <li>Android</li>
+              <li>iOS</li>
+            </ul>
+            <p class="status"><i aria-hidden="true"></i>In development</p>
+          </article>
+
+        </div>
+        <!-- ===================== end products ====================== -->
+      </div>
+    </section>
+
+    <section class="section" id="approach" aria-labelledby="approach-h">
+      <div class="wrap">
+        <p class="label">Approach</p>
+        <h2 id="approach-h">How the studio works</h2>
+
+        <ul class="points">
+          <li>
+            <span class="num">01</span>
+            <h3>We start from our own problems</h3>
+            <p>Every product begins with something we wanted to exist and could not find. If we would not open it daily ourselves, we do not build it.</p>
+          </li>
+          <li>
+            <span class="num">02</span>
+            <h3>One team, end to end</h3>
+            <p>Design, code and support are not separate stages passed between hands. A product is carried from first sketch to shipped build by the same people.</p>
+          </li>
+          <li>
+            <span class="num">03</span>
+            <h3>Every platform from the start</h3>
+            <p>Web, Android and iOS are planned together rather than ported one after another once the first one works. A product ships when all of its platforms are ready.</p>
+          </li>
+          <li>
+            <span class="num">04</span>
+            <h3>Independent, and staying that way</h3>
+            <p>No clients. What ships is what we think should ship, and we live with the consequences of getting it wrong.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section" id="contact" aria-labelledby="contact-h">
+      <div class="wrap">
+        <p class="label">Contact</p>
+        <h2 id="contact-h">Say hello</h2>
+        <p class="section-note">We do not take on client work. But if you want to know when something ships, or you have a question about what we are building, this reaches us.</p>
+        <a class="mail" href="mailto:hello@lymsta.com">hello@lymsta.com</a>
+      </div>
+    </section>
+
   </main>
 
-  <footer class="fade fade--4">
-    <a href="mailto:hello@lymsta.com">hello@lymsta.com</a>
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="foot-left">
+        <a class="wordmark" href="/">lymsta<span class="dot">.</span></a>
+        <!-- update the year when it rolls over -->
+        <p class="copy">&copy; 2026 Lymsta</p>
+      </div>
+      <nav aria-label="Footer">
+        <ul class="nav">
+          <li><a href="#products">Products</a></li>
+          <li><a href="#approach">Approach</a></li>
+          <li><a href="/privacy.html">Privacy</a></li>
+          <li><a href="mailto:hello@lymsta.com">hello@lymsta.com</a></li>
+        </ul>
+      </nav>
+    </div>
   </footer>
 </body>
 </html>

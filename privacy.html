@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy — Lymsta</title>
+<meta name="description" content="What lymsta.com collects, and what it does not.">
+<link rel="canonical" href="https://lymsta.com/privacy.html">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Lymsta">
+<meta property="og:url" content="https://lymsta.com/privacy.html">
+<meta property="og:title" content="Privacy — Lymsta">
+<meta property="og:description" content="What lymsta.com collects, and what it does not.">
+<meta property="og:image" content="https://lymsta.com/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Privacy — Lymsta">
+<meta name="twitter:description" content="What lymsta.com collects, and what it does not.">
+<meta name="twitter:image" content="https://lymsta.com/og.png">
+
+<meta name="theme-color" content="#09090b">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --bg:#09090b;
+    --ink:#fafafa;
+    --muted:#8b8b94;
+    --rule:rgba(250,250,250,.14);
+    --accent:#8ab4ff;
+    --glow:rgba(120,160,255,.16);
+    --pad:clamp(1.25rem, 5vw, 2.5rem);
+  }
+
+  *{box-sizing:border-box}
+  html{overflow-x:hidden}
+
+  body{
+    margin:0;
+    min-height:100vh;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+    font-weight:300;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+    overflow-x:hidden;
+    display:flex;
+    flex-direction:column;
+  }
+
+  body::before{
+    content:"";
+    position:fixed;
+    inset:-20%;
+    background:
+      radial-gradient(42rem 28rem at 50% 42%, var(--glow), transparent 68%),
+      radial-gradient(30rem 30rem at 82% 88%, rgba(255,140,190,.09), transparent 70%);
+    pointer-events:none;
+    z-index:0;
+  }
+
+  body::after{
+    content:"";
+    position:fixed;
+    inset:0;
+    z-index:1;
+    pointer-events:none;
+    opacity:.035;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .site-header,main,.site-footer{position:relative;z-index:2}
+
+  .wrap{
+    width:100%;
+    max-width:64rem;
+    margin-left:auto;
+    margin-right:auto;
+    padding-left:var(--pad);
+    padding-right:var(--pad);
+  }
+
+  a{color:inherit}
+
+  :focus-visible{
+    outline:2px solid var(--accent);
+    outline-offset:3px;
+    border-radius:2px;
+  }
+
+  .skip{
+    position:absolute;left:-9999px;top:0;
+    background:var(--bg);color:var(--ink);
+    padding:.7rem 1rem;font-size:.8125rem;z-index:10;
+  }
+  .skip:focus{left:var(--pad)}
+
+  .dot{color:var(--accent)}
+
+  .site-header{border-bottom:1px solid var(--rule)}
+  .site-header .wrap{
+    padding-top:1.75rem;padding-bottom:1.75rem;
+    display:flex;align-items:center;justify-content:space-between;gap:1rem;
+  }
+  .wordmark{
+    font-size:1.3125rem;
+    letter-spacing:-.045em;
+    line-height:1;
+    text-decoration:none;
+    color:var(--ink);
+  }
+  .site-header nav a{
+    font-size:.75rem;font-weight:400;
+    letter-spacing:.16em;text-transform:uppercase;
+    color:var(--muted);text-decoration:none;
+    border-bottom:1px solid transparent;
+    transition:color .2s,border-color .2s;
+  }
+  .site-header nav a:hover,.site-header nav a:focus-visible{color:var(--ink);border-bottom-color:var(--rule)}
+
+  main{flex:1;padding-top:clamp(3rem,8vw,5rem);padding-bottom:4.5rem}
+
+  .eyebrow{
+    margin:0;
+    font-size:.75rem;font-weight:400;
+    letter-spacing:.22em;text-transform:uppercase;
+    color:var(--muted);
+  }
+
+  h1{
+    margin:1.5rem 0 0;
+    font-weight:300;
+    font-size:clamp(2.25rem,6vw,3.5rem);
+    letter-spacing:-.04em;
+    line-height:1.08;
+  }
+
+  .updated{
+    margin:1.25rem 0 0;
+    font-size:.8125rem;
+    letter-spacing:.04em;
+    color:var(--muted);
+  }
+
+  .summary{
+    margin:2.75rem 0 0;
+    padding:1.5rem 1.65rem;
+    border:1px solid var(--rule);
+    border-radius:3px;
+    max-width:62ch;
+  }
+  .summary p{margin:0;font-size:1.0625rem;line-height:1.7;color:var(--ink)}
+
+  .doc{margin-top:3.5rem;max-width:62ch;display:flex;flex-direction:column;gap:2.75rem}
+
+  section h2{
+    margin:0 0 1rem;
+    font-weight:400;
+    font-size:1.125rem;
+    letter-spacing:-.012em;
+    line-height:1.3;
+  }
+
+  .doc p{
+    margin:0 0 1rem;
+    font-size:1rem;
+    line-height:1.8;
+    color:var(--muted);
+  }
+  .doc p:last-child{margin-bottom:0}
+  .doc strong{color:var(--ink);font-weight:400}
+
+  .doc ul{margin:0 0 1rem;padding-left:1.1rem;display:flex;flex-direction:column;gap:.6rem}
+  .doc li{font-size:1rem;line-height:1.75;color:var(--muted)}
+  .doc li::marker{color:var(--rule)}
+  .doc ul:last-child{margin-bottom:0}
+
+  .doc a{
+    color:var(--ink);
+    text-decoration:none;
+    border-bottom:1px solid var(--rule);
+    transition:border-color .2s;
+  }
+  .doc a:hover,.doc a:focus-visible{border-bottom-color:var(--accent)}
+
+  .site-footer{border-top:1px solid var(--rule)}
+  .site-footer .wrap{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    justify-content:space-between;
+    gap:.75rem 2rem;
+    padding-top:2rem;
+    padding-bottom:2.25rem;
+    font-size:.8125rem;
+    font-weight:400;
+    letter-spacing:.04em;
+    color:var(--muted);
+  }
+  .site-footer p{margin:0}
+  .site-footer nav{display:flex;flex-wrap:wrap;gap:.75rem 1.75rem}
+  .site-footer a{
+    color:var(--muted);
+    text-decoration:none;
+    border-bottom:1px solid transparent;
+    transition:color .2s, border-color .2s;
+  }
+  .site-footer a:hover,.site-footer a:focus-visible{color:var(--ink);border-bottom-color:var(--rule)}
+
+  .fade{opacity:0;transform:translateY(.5rem);animation:rise .9s cubic-bezier(.22,.61,.36,1) forwards}
+  .fade--2{animation-delay:.14s}
+  .fade--3{animation-delay:.26s}
+  @keyframes rise{to{opacity:1;transform:none}}
+
+  @media (prefers-reduced-motion:reduce){
+    .fade{animation:none;opacity:1;transform:none}
+    *{transition-duration:.01ms !important}
+  }
+</style>
+</head>
+<body>
+  <a class="skip" href="#content">Skip to content</a>
+
+  <header class="site-header">
+    <div class="wrap">
+      <a class="wordmark" href="/">lymsta<span class="dot">.</span></a>
+      <nav aria-label="Primary"><a href="/">Home</a></nav>
+    </div>
+  </header>
+
+  <main id="content">
+    <div class="wrap">
+      <p class="eyebrow fade">Privacy</p>
+      <h1 class="fade fade--2">What this site collects<span class="dot">.</span></h1>
+      <!-- Update this date whenever the policy below changes. -->
+      <p class="updated fade fade--2">Last updated 14 October 2026</p>
+
+      <div class="summary fade fade--3">
+        <p>lymsta.com is a static site. It sets no cookies, runs no analytics, and has no accounts, no forms and no tracking of any kind. We do not build a profile of you, and we have nothing to sell to anyone.</p>
+      </div>
+
+      <div class="doc fade fade--3">
+
+        <section>
+          <h2>What we collect directly</h2>
+          <p><strong>Nothing.</strong> There is no JavaScript on this site, no analytics script, no advertising pixel, no cookie banner because there are no cookies, and no form to fill in. We do not know who you are or that you visited.</p>
+        </section>
+
+        <section>
+          <h2>What our hosting provider sees</h2>
+          <p>This site is served by <strong>GitHub Pages</strong>. Like any web host, GitHub receives the requests your browser makes, which includes your IP address, and it may log them for security and operational reasons. That happens at the hosting layer, before anything reaches us, and we have no access to those logs.</p>
+          <p>GitHub's handling of that data is covered by the <a href="https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement" rel="noopener">GitHub Privacy Statement</a> and, specifically for this case, their note on <a href="https://docs.github.com/pages/getting-started-with-github-pages/what-is-github-pages#data-collection" rel="noopener">data collection on GitHub Pages</a>.</p>
+        </section>
+
+        <section>
+          <h2>Fonts</h2>
+          <p>The typeface on this site is loaded from <strong>Google Fonts</strong>. Your browser therefore makes a request to Google's servers, and Google receives your IP address as part of that request. We do not receive anything from this and we pass nothing to Google ourselves. Their terms are described in the <a href="https://developers.google.com/fonts/faq/privacy" rel="noopener">Google Fonts privacy FAQ</a>.</p>
+          <p>We mention this because it is the only third party your browser contacts when loading this page, and we would rather name it than let it go unsaid.</p>
+        </section>
+
+        <section>
+          <h2>If you email us</h2>
+          <p>Writing to <a href="mailto:hello@lymsta.com">hello@lymsta.com</a> means we hold your message and your address, because that is what email is. We use it to reply to you and for nothing else. We do not add you to a mailing list, and we do not pass it on.</p>
+          <p>If you want your message and address deleted, ask and we will delete them.</p>
+        </section>
+
+        <section>
+          <h2>Our apps</h2>
+          <p>This policy covers <strong>this website only</strong>. Lymsta has not released any apps yet. When one ships, it will carry its own privacy policy describing what that specific app collects, and that policy will be linked from its store listing and from this site.</p>
+          <p>Do not read this page as a statement about a future app. An app that handles accounts or user data will have obligations this static site simply does not.</p>
+        </section>
+
+        <section>
+          <h2>Changes</h2>
+          <p>If this policy changes, the date at the top of the page changes with it. There is no version history beyond that, though the site's full edit history is public on GitHub if you ever want to check what changed and when.</p>
+        </section>
+
+        <section>
+          <h2>Contact</h2>
+          <p>Questions about any of the above go to <a href="mailto:hello@lymsta.com">hello@lymsta.com</a>.</p>
+        </section>
+
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <!-- Update the year when it rolls over. -->
+      <p>&copy; 2026 Lymsta</p>
+      <nav aria-label="Footer">
+        <a href="/">Home</a>
+        <a href="/privacy.html">Privacy</a>
+        <a href="mailto:hello@lymsta.com">hello@lymsta.com</a>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>
